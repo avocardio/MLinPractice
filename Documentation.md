@@ -679,6 +679,23 @@ We have written tests for tfidf_vec and hash_vector, because even though the skl
 We added in 'run_classifier.py' a number of functions to run this file from the run_classifier_test.py which tests all classifiers, checks if the data is still equal length, tries the classifiers to fit and if not, checks if the file gives the correct error output. 
 
 
+## Application
+We also extended the application stub that was given to us. You will see that we removed the dimensionality reduction step from the pipeline, as mentioned before. First of all, we kept the part where the user can enter his/her tweet of course. Afterwards, we sadly need to ask the user how many videos the tweet contains. This is due to the fact that in the original data set, there already was a column that contained an exact number of how many videos the tweets contained. For the photos however, it is important to remember that photos in twitter are embedded with a link. Hence, we took the general structure of the link, namely ```https://pbs.twimg.com/media```, and found out that images in Twitter are either in the format of ```.png``` oder ```.jpg```. We then search in the user input for all of those parts that contain the general link structure, as well as one of the image formats and append the links to a list.
+Since we also included the posting time of the tweet as a feature, we get the current time in the next step.
+We needed to extend the dataframe with the features that we use and the ones that are being deviated from the existing ones. Here, we either use the tweet itself, the video input the user has made before, the list of photos and the current time. For that feature, we just had to format it in the right way such that our pipeline can handle it in a way that produces meaningful outputs.
+In the last step, we only added some more text to the output that the user will receive.
+
+Example inputs and their corresponding outputs:
+
+Input: | Output: 
+-------|--------
+`data algorithm free coding https://pbs.twimg.com/media/xyz.png 😀 😃 😄 😁 😆 😅 😂 🤣 🥲 ☺️ 😊 😇 🙂 🙃 😉` | `[True] Your tweet will most likely go viral.`
+
+Input: | Output: 
+-------|--------
+`hello there #123` | `[False] Your tweet will most likely not go viral.`
+
+
 ## Project Organization
 
 Our overall organization went very smoothly. The use of Trello, which none of us had heard before, was a suprisingly pleasent experience. Especially for really bringing that needed structure into the group work. We held meetings every 2 days, in a similar fashion to scrum, where we talked about current Trello sprints and what we should have finished until the next sprint. We really only had to postpone very little things and the overall workflow worked really well. 
