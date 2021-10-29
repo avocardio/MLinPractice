@@ -342,11 +342,11 @@ tweet_charlength	| hashtags_hashtag_count	| tweet_emoji_count |	photos_bool |	vi
 74.0  | 2.0 |	0.0 |	1.0 |	1.0 |	0.09417513012886047 |	4.0
 ... | ... | ... | ... | ... | ... | ...
 
-Another important point to mention regarding the HashingVectorizer feauture, is that because it outputs multiple values (in our case a list of 1024 features per tweet), it had to fit our framework of unique values per feature column. Due to this, we extracted all 1024 features and added them to individual columns alongside the 7 features above, making the feature space of length ( _ ,131079). We also decided to do this to avoid any kind of feature outweighing that might occur. 
+Another important point to mention regarding the HashingVectorizer feauture, is that because it outputs multiple values (in our case a list of 131072 features per tweet), it had to fit our framework of unique values per feature column. Due to this, we extracted all 131072 features and added them to individual columns alongside the 7 features above, making the feature space of length ( _ ,131079). We also decided to do this to avoid any kind of feature outweighing that might occur. 
 
 ## Dimensionality Reduction
 
-At first, we tried reducing the dimensionality using a few methods like the `sklearn` integrated PCA. But when looking at the before and after results, it did not change much, and even changed crucial parts about the HashingVectorizer which even sometimes affected the performance negatively. At the end, we only kept the dimensionality reductor that was already implemented, namely being the ```K-Best selector``` using mutual information or chi2. 
+At first, we tried reducing the dimensionality using a few methods like the `sklearn` integrated PCA. But when looking at the before and after results, it did not change much, and even changed crucial parts about the HashingVectorizer which even sometimes affected the performance negatively. At the end, we only kept the dimensionality reductor that was already implemented, namely being the ```K-Best selector``` using mutual information. But we did not use any form of dimensionality reduction in our working pipeline due to the reasons stated. 
 
 ## Classification
 
@@ -456,7 +456,7 @@ Note: all evaluation results refer to the _validation_ set.
 
 #### A) *Old Pipeline*
 
-For our 3 classifiers mentioned above, we ran each classifier using all features except for the HashingVectorizer from the feature extraction. 
+For our 3 classifiers mentioned above, we ran each classifier using _all_ features from the feature extraction. 
 
 
 <br />
@@ -465,22 +465,21 @@ For our 3 classifiers mentioned above, we ran each classifier using all features
 
 Summary: 
 ```
-Accuracy: 0.9041802005366474
-Cohen's kappa: 0.00803829878595641
-Balanced accuracy: 0.5022758560449461
+Accuracy: 0.631602174834063
+Cohen's kappa: 0.10319595346840948
+Balanced accuracy: 0.6242586916278406
 ```
 
 Detail:
 ```
-
               precision    recall  f1-score   support
 
-        Flop       0.91      1.00      0.95     51314
-       Viral       0.22      0.01      0.01      5334
+        Flop       0.94      0.63      0.76     51314
+       Viral       0.15      0.62      0.24      5334
 
-    accuracy                           0.90     56648
-   macro avg       0.56      0.50      0.48     56648
-weighted avg       0.84      0.90      0.86     56648
+    accuracy                           0.63     56648
+   macro avg       0.55      0.63      0.50     56648
+weighted avg       0.87      0.63      0.71     56648
 
 ```
 <br />
@@ -490,23 +489,22 @@ weighted avg       0.84      0.90      0.86     56648
 Sumary: 
 ```
 
-Accuracy: 0.9043920350233018
-Cohen's kappa: 0.004026361372568399
-Balanced accuracy: 0.5011328679015875
+Accuracy: 0.8826907687238149
+Cohen's kappa: 0.04342920171916376
+Balanced accuracy: 0.5156113883206965
 
 ```
 
 Detail:
 ```
-
               precision    recall  f1-score   support
 
-        Flop       0.91      1.00      0.95     51314
-       Viral       0.18      0.00      0.01      5334
+        Flop       0.91      0.97      0.94     51314
+       Viral       0.17      0.06      0.09      5334
 
-    accuracy                           0.90     56648
-   macro avg       0.54      0.50      0.48     56648
-weighted avg       0.84      0.90      0.86     56648
+    accuracy                           0.88     56648
+   macro avg       0.54      0.52      0.51     56648
+weighted avg       0.84      0.88      0.86     56648
 
 ```
 
@@ -517,22 +515,21 @@ weighted avg       0.84      0.90      0.86     56648
 Summary:
 ```
 
-Accuracy: 0.605881937579438
-Cohen's kappa: 0.10583401001749515
-Balanced accuracy: 0.6367268264986774
+Accuracy: 0.6104304947512121
+Cohen's kappa: 0.10488089764993025
+Balanced accuracy: 0.6337966174766455
 
 ```
 
 Detail: 
 ```
-
               precision    recall  f1-score   support
 
-        Flop       0.95      0.60      0.73     51314
-       Viral       0.15      0.67      0.24      5334
+        Flop       0.94      0.61      0.74     51314
+       Viral       0.15      0.66      0.24      5334
 
     accuracy                           0.61     56648
-   macro avg       0.55      0.64      0.49     56648
+   macro avg       0.55      0.63      0.49     56648
 weighted avg       0.87      0.61      0.69     56648
 
 ```
@@ -557,8 +554,7 @@ balanced accuracy: 0.6766037922018122
 
 Detail:
 ```
-
-     Test set      precision    recall  f1-score   support
+              precision    recall  f1-score   support
 
         Flop       0.96      0.54      0.69      7665
        Viral       0.16      0.81      0.27       833
@@ -764,14 +760,14 @@ In conclusion, we are very satisfied with our final result. Cohen's kappa of 0.3
 
 ## Tests
 
-We have written tests for tfidf_vec and hash_vector, because even though the sklearn functions themselves naturally have many tests implemented, we want to double check that we are using them correctly and that we are getting the expected output. Therefore, especially 'test_result_shape' is very important, because it checks if the length of the output list matches the number of input elements.  
+We wrote tests for the HashingVectorizer, because even though the sklearn functions themselves naturally have many tests implemented, we want to double check that we are using them correctly and that we are getting the expected output. Therefore, especially 'test_result_shape' is very important, because it checks if the length of the output list matches the number of input elements. We also wrote test files for bigrams and the tokenizer. 
 
-We added in 'run_classifier.py' a number of functions to run this file from the run_classifier_test.py which tests all classifiers, checks if the data is still equal length, tries the classifiers to fit and if not, checks if the file gives the correct error output. 
+We added in `run_classifier.py` a number of functions to run this file from the run_classifier_test.py which tests all classifiers, checks if the data is still equal length, tries the classifiers to fit and if not, checks if the file gives the correct error output. 
 
 
 ## Application
 
-We also extended the application stub that was given to us. You will see that we removed the dimensionality reduction step from the pipeline, as mentioned before. First of all, we kept the part where the user can enter his/her tweet of course. Afterwards, we need to ask the user how many videos the tweet contains. This is due to the fact that in the original data set, there already was a column that contained an exact number of how many videos the tweets contained. For the photos however, it is important to remember that photos in twitter are embedded with a link. Hence, we took the general structure of the link, namely ```https://pbs.twimg.com/media```, and found out that images in Twitter are either in the format of ```.png``` or ```.jpg```. We then search in the user input for all of those parts that contain the general link structure, as well as one of the image formats and append the links to a list.
+At the end, we also extended the application stub that was given to us. You will see that we removed the dimensionality reduction step from the pipeline, as mentioned before. First of all, we kept the part where the user can enter his/her tweet of course. Afterwards, we need to ask the user how many videos the tweet contains. This is due to the fact that in the original data set, there already was a column that contained an exact number of how many videos the tweets contained. For the photos however, it is important to remember that photos in twitter are embedded with a link. Hence, we took the general structure of the link, namely ```https://pbs.twimg.com/media```, and found out that images in Twitter are either in the format of ```.png``` or ```.jpg```. We then search in the user input for all of those parts that contain the general link structure, as well as one of the image formats and append the links to a list.
 Since we also included the posting time of the tweet as a feature, we get the current time in the next step. We used the tweet itself, the video input the user has made before, the list of photos and the current time, and finally the remaining text-based features of our feature extraction. To use all those features together, we just had to format them in the right way such that our pipeline handles it to produces meaningful outputs.
 
 Working example of inputs and their corresponding outputs:
@@ -785,3 +781,11 @@ Input: | Output:
 ## Project Organization
 
 Our overall organization went very smoothly. The use of Trello, which none of us had heard before, was a suprisingly pleasent experience. Especially for really bringing that needed structure into the group work. We held meetings every 2 days, in a similar fashion to scrum, where we talked about current Trello sprints and what we should have finished until the next sprint. We really only had to postpone very little things and the overall workflow worked really well. 
+
+We structured our Trello workspace into different cards:
+
+![trello](/Documentation/trello.png)
+
+&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; [7] Our Trello Workspace
+
+Starting from the left, we chose to set the project structure early on as a guiding point throughout the seminar. We used the same card next, to set up checklists with things we wanted to integrate and try under each section. Every section was more or less completed during the 2 days between meetings, starting with the preprocessing work and gradually working up towards the evaluation of the classifier. During these sections, we worked on different subtasks, like we each had different preprocessings steps to implement. The tagging function also helped giving out the tasks. In the subsequent meetings cards, which we stored under 'Next Spring', we wrote the general content of the meeting beforehand. This would include exchanging results form the previous days, new features, issues, etc. In the meeting itself, stored under 'Active Sprints', we checked and talked about every point written, and planned the next meeting for the next 2 days. After a meeting was completed and the entire checklist was finished, we stored the card in 'Done Sprint'. Having it organized this way worked really well for us since we always knew what needed to be worked on and what was finished in (almost) real time.
