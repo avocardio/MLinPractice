@@ -16,7 +16,6 @@ import numpy as np
 from code.feature_extraction.character_length import CharacterLength
 from code.feature_extraction.emoji_count import EmojiCount
 from code.feature_extraction.hash_vector import HashVector
-from code.feature_extraction.tfidf_vector import TfidfVector
 from code.feature_extraction.feature_collector import FeatureCollector
 from code.feature_extraction.hashtag_count import HashtagCount
 from code.feature_extraction.photo_bool import PhotoBool
@@ -28,7 +27,6 @@ from code.util import (
     COLUMN_LABEL,
     COLUMN_PREPROCESS,
     COLUMN_PHOTOS,
-    COLUMN_REPLIES,
     COLUMN_VIDEO,
 )
 
@@ -57,9 +55,6 @@ parser.add_argument(
 )
 parser.add_argument(
     "--hash_vec", action="store_true", help="compute the hash vector of the tweet"
-)
-parser.add_argument(
-    "--tfidf_vec", action="store_true", help="compute the tf idf of the tweet"
 )
 parser.add_argument(
     "--photo_bool",
@@ -111,9 +106,6 @@ else:  # need to create FeatureCollector manually
         print("Add hashtags feature")
         # number of hashtags per tweet
         features.append(HashtagCount("hashtags"))
-    if args.tfidf_vec:
-        print("Add tfidf_vec feature")
-        features.append(TfidfVector(COLUMN_PREPROCESS))
     if args.emoji_count:
         features.append(EmojiCount(COLUMN_TWEET))
     if args.photo_bool:

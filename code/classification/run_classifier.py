@@ -181,14 +181,14 @@ def create_classifier(args, data):
                 n_jobs=-1,
                 random_state=args.seed,
                 verbose=verbose,
-                max_iter=MAX_ITER_LOGISTIC,
+                #max_iter=MAX_ITER_LOGISTIC,
             )
         elif args.LinearSVC:
             classifier = LinearSVC(
                 class_weight=balanced,
                 random_state=args.seed,
                 verbose=verbose,
-                max_iter=MAX_ITER_LINEAR_SVC,
+                #max_iter=MAX_ITER_LINEAR_SVC,
             )
 
         try:
