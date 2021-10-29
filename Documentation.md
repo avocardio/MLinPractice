@@ -2,7 +2,7 @@
 
 This is the documentation for the forked repository of Magnus Müller, Maximilian Kalcher and Samuel Hagemann. 
 
-Please refer to our [Readme. md](Readme.md) for the source code and practical guide on how to get the project running. 
+Please refer to our [Readme.md](Readme.md) for the source code and practical guide on how to get the project running. 
 
 Our task involved building and documenting a real-life application of a machine learning task. We were given a [dataset](https://www.kaggle.com/ruchi798/data-science-tweets) of 295811 tweets about data science from the years 2010 until 2021 and had to build a classifier that would detect whether a tweet would go viral or not. The measure for it being viral was when the sum of likes and retweets were bigger than 50, which resulted in 91% false (or non-viral) labels, and 9% true (or viral) labels.
 
