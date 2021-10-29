@@ -628,6 +628,7 @@ weighted avg       0.90      0.83      0.85      8498
 
 #### C) *Running tests with out best classifier: LogisticRegression*
 <br />
+
 1. *Logistic Regression without HashingVectorizer*
 
 Here we wanted to test how good the classifier is just with our implemented features with information about time, videos, photos and the tweet length without HashingVectorizer.
@@ -686,6 +687,7 @@ weighted avg       0.89      0.83      0.85      8498
 The training finished after 28.9s and 200 iterations.
 
 <br />
+
 3. *What about overfitting?*
 
 To see to what extent the classifier overfits, we created a table for the training set for all features with the LogisticRegression classifier. Thus, this is the output for the predicted data previously given to the classifier for training. With regard to the parameters it is comparable to the output of the test set above (B3).
@@ -693,6 +695,7 @@ To see to what extent the classifier overfits, we created a table for the traini
 ````
 
 Matrix Train set:
+
               precision    recall  f1-score   support
 
         Flop       1.00      0.89      0.94    252744
@@ -705,9 +708,10 @@ weighted avg       0.95      0.89      0.91    278991
 ````
 
 <br />
+
 4. *Cheating Features*
 
-To check if our classifier really works, we tried as a last test to add the features 'replies_count', 'retweets_count' and 'likes_count'.
+To check if our classifier really works, we tried as a last test to add the features replies_count, retweets_count and likes_count.
 
 Summary:
 ```
@@ -733,6 +737,7 @@ Detail:
 weighted avg       1.00      1.00      1.00      8498
 ```
 <br />
+
 ### Interpretation
 
 When we did our first tests we ran it successfully with 25 features (including HashingVectorizer), we tried it with the SVM classifier, but that took too much time (nearly endless). We read later that runtime increases with SVM quadratic with the number of samples. So we used KNN with 4 NN on a 20000 sample subset and for the first time our Cohen kappa went from 0.0 to 0.1. That was a big sucess for us.
@@ -766,12 +771,10 @@ We added in 'run_classifier.py' a number of functions to run this file from the 
 
 ## Application
 
-We also extended the application stub that was given to us. You will see that we removed the dimensionality reduction step from the pipeline, as mentioned before. First of all, we kept the part where the user can enter his/her tweet of course. Afterwards, we sadly need to ask the user how many videos the tweet contains. This is due to the fact that in the original data set, there already was a column that contained an exact number of how many videos the tweets contained. For the photos however, it is important to remember that photos in twitter are embedded with a link. Hence, we took the general structure of the link, namely ```https://pbs.twimg.com/media```, and found out that images in Twitter are either in the format of ```.png``` oder ```.jpg```. We then search in the user input for all of those parts that contain the general link structure, as well as one of the image formats and append the links to a list.
-Since we also included the posting time of the tweet as a feature, we get the current time in the next step.
-We needed to extend the dataframe with the features that we use and the ones that are being deviated from the existing ones. Here, we either use the tweet itself, the video input the user has made before, the list of photos and the current time. For that feature, we just had to format it in the right way such that our pipeline can handle it in a way that produces meaningful outputs.
-In the last step, we only added some more text to the output that the user will receive.
+We also extended the application stub that was given to us. You will see that we removed the dimensionality reduction step from the pipeline, as mentioned before. First of all, we kept the part where the user can enter his/her tweet of course. Afterwards, we need to ask the user how many videos the tweet contains. This is due to the fact that in the original data set, there already was a column that contained an exact number of how many videos the tweets contained. For the photos however, it is important to remember that photos in twitter are embedded with a link. Hence, we took the general structure of the link, namely ```https://pbs.twimg.com/media```, and found out that images in Twitter are either in the format of ```.png``` or ```.jpg```. We then search in the user input for all of those parts that contain the general link structure, as well as one of the image formats and append the links to a list.
+Since we also included the posting time of the tweet as a feature, we get the current time in the next step. We used the tweet itself, the video input the user has made before, the list of photos and the current time, and finally the remaining text-based features of our feature extraction. To use all those features together, we just had to format them in the right way such that our pipeline handles it to produces meaningful outputs.
 
-Example inputs and their corresponding outputs:
+Working example of inputs and their corresponding outputs:
 
 Input: | Output: 
 -------|--------
