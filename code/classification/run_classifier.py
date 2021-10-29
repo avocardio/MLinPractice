@@ -177,7 +177,7 @@ def create_classifier(args, data):
                 n_jobs=-1,
                 random_state=args.seed,
                 verbose=verbose,
-                #max_iter=MAX_ITER_LOGISTIC,
+                max_iter=MAX_ITER_LOGISTIC,
             )
         elif args.LinearSVC:
             classifier = LinearSVC(
@@ -206,6 +206,7 @@ def evaluate_classifier(args, data, prediction):
     if args.balanced_accuracy:
         evaluation_metrics.append(("balanced accuracy", balanced_accuracy_score))
     # compute and print them
+    print('\n')
     for metric_name, metric in evaluation_metrics:
         print("    {0}: {1}".format(metric_name, metric(data["labels"], prediction)))
 
