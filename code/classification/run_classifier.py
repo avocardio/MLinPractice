@@ -188,7 +188,7 @@ def create_classifier(args, data):
                 class_weight=balanced,
                 random_state=args.seed,
                 verbose=verbose,
-                #max_iter=MAX_ITER_LINEAR_SVC,
+                max_iter=30000,
             )
 
         try:

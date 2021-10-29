@@ -28,7 +28,7 @@ SUFFIX_TOKENIZED = "_tokenized"
 # split dataset (all in one)
 TEST_SIZE = 0.015
 # number of features for hash vector
-HASH_VECTOR_N_FEATURES = 2**20
+HASH_VECTOR_N_FEATURES = 2**17
 HASH_VECTOR_N_FEATURES_TITLE = 2**3
 NGRAM_RANGE = (1, 2)
 
