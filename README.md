@@ -1,6 +1,8 @@
 # Machine Learning in Practice
 
-Source code for the practical Seminar "Machine Learning in Practice", taught at Osnabrück University in the winter term 2021/2022 at the Insitute of Cognitive Science.
+This is the source code and practical guide for the Seminar "Machine Learning in Practice", taught at Osnabrück University in the winter term 2021/2022 at the Insitute of Cognitive Science.
+
+Our complete [Documentation](Documentation.md) for our group project can be found as a file above. 
 
 As data source, we use the "Data Science Tweets 2010-2021" data set (version 3) by Ruchi Bhatia from [Kaggle](https://www.kaggle.com/ruchi798/data-science-tweets). The goal of our example project is to predict which tweets will go viral, i.e., receive many likes and retweets.
 
@@ -15,7 +17,6 @@ conda create -y -q --name MLinPractice python=3.6
 You can enter this environment with `conda activate MLinPractice` (or `source activate MLinPractice` , if the former does not work). You can leave it with `conda deactivate` (or `source deactivate` , if the former does not work). Enter the environment and execute the following commands in order to install the necessary dependencies (this may take a while):
 
 ```
-
 conda install -y -q -c conda-forge scikit-learn=0.24.2
 conda install -y -q -c conda-forge matplotlib=3.3.4
 conda install -y -q -c conda-forge nltk=3.6.3
@@ -24,7 +25,6 @@ conda install -y -q -c conda-forge spyder=5.1.5
 conda install -y -q -c conda-forge pandas=1.1.5
 conda install -y -q -c conda-forge mlflow=1.20.2
 conda install -y -q -c conda-forge spacy
-
 ```
 
 You can double-check that all of these packages have been installed by running `conda list` inside of your virtual environment. The Spyder IDE can be started by typing `~/miniconda/envs/MLinPractice/bin/spyder` in your terminal window (assuming you use miniconda, which is installed right in your home directory).
@@ -66,9 +66,7 @@ The script takes the following optional parameters:
 
 The script `run_preprocessing.py` is used to run various preprocessing steps on the raw data, producing additional columns in the csv file. It is executed as follows:
 ```
-
 python -m code.preprocessing.run_preprocessing path/to/input.csv path/to/output.csv
-
 ```
 Here, `input.csv` is a csv file (ideally the output of `create_labels.py`), while `output.csv` is the csv file where the output will be written.
 The preprocessing steps to take can be configured with the following flags:
@@ -123,12 +121,12 @@ Moreover, the script support importing and exporting fitted feature extractors w
 
 ## Dimensionality Reduction
 
-All python scripts and classes for dimensionality reduction can be found in `code/dimensionality_reduction/` .
+All python scripts and classes for dimensionality reduction can be found in `code/dimensionality_reduction/` . As stated in the Documentation, we did not use any form of dimensionality reduction in our working pipeline, but have included the files nonetheless. 
 
 The script `reduce_dimensionality.py` takes care of the overall dimensionality reduction procedure and can be invoked as follows:
 
-```python -m code.dimensionality_reduction.reduce_dimensionality path/to/input.pickle path/to/output.pickle
-
+```
+python -m code.dimensionality_reduction.reduce_dimensionality path/to/input.pickle path/to/output.pickle
 ```
 
 Here, `input.pickle` is the respective training, validation, or test set file created by `extract_features.py` . 
@@ -150,8 +148,8 @@ All python scripts and classes for classification can be found in `code/classifi
 ### Train and Evaluate a Single Classifier
 
 The script `run_classifier.py` can be used to train and/or evaluate a given classifier. It can be executed as follows:
-```python -m code.classification.run_classifier path/to/input.pickle
-
+```
+python -m code.classification.run_classifier path/to/input.pickle
 ```
 
 Here, `input.pickle` is a pickle file of the respective data subset, produced by either `extract_features.py` or `reduce_dimensionality.py` . 
@@ -216,3 +214,14 @@ Execute it with the script `code/all_in_one_multiple_input_features.sh` :
     - `--classifier` `LogisticRegression`
     - `--classifier` `LinearSVC`
     - `--classifier` `SVC`
+
+## Tests
+
+To run one of our unit-tests you can execute a command in the following style:
+`python3 -m test.classifier.run_classifier_test`
+
+The tests are located in ```code/tests/``` and include the following:
+* `classifier/run_classifier_test.py`
+* `feature_extraction/bigrams_test.py`
+* `feature_extraction/hash_vector_test.py`
+* `preprocessing/tokenizer_test.py`
