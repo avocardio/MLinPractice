@@ -39,7 +39,6 @@ The overall pipeline can be executed with the script `code/pipeline.sh` , which 
 * The script `code/load_data.sh` downloads the raw csv files containing the tweets and their metadata. They are stored in the folder `data/raw/` (which will be created if it does not yet exist).
 * The script `code/preprocessing.sh` executes all necessary preprocessing steps, including a creation of labels and splitting the data set.
 * The script `code/feature_extraction.sh` takes care of feature extraction.
-* The script `code/dimensionality_reduction.sh` takes care of dimensionality reduction.
 * The script `code/classification.sh` takes care of training and evaluating a classifier.
 * The script `code/application.sh` launches the application example.
 
