@@ -2,7 +2,7 @@
 
 This is the source code and practical guide for the Seminar "Machine Learning in Practice", taught at Osnabrück University in the winter term 2021/2022 at the Insitute of Cognitive Science.
 
-Our complete [Documentation](Documentation.md) for our group project can be found as a file above. 
+Our complete [Documentation](Documentation.md) for our group project can be found as a file above. Please refer to this file for any design decisions and examples, as well as classifier evaluations. 
 
 As data source, we use the "Data Science Tweets 2010-2021" data set (version 3) by Ruchi Bhatia from [Kaggle](https://www.kaggle.com/ruchi798/data-science-tweets). The goal of our example project is to predict which tweets will go viral, i.e., receive many likes and retweets.
 
