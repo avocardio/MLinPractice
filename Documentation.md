@@ -2,7 +2,7 @@
 
 This is the forked repository for Magnus Müller, Maximilian Kalcher and Samuel Hagemann. 
 
-Our task involved building and documenting a real-life application of a machine learning task. We were given a dataset of 295811 tweets about data science from the years 2010 until 2021 and had to build a classifier that would detect whether a tweet would go viral or not. The measure for it being viral was when the sum of likes and retweets were bigger than 50, which resulted in 91% false (or non-viral) labels, and 9% true (or viral) labels.
+Our task involved building and documenting a real-life application of a machine learning task. We were given a [dataset](https://www.kaggle.com/ruchi798/data-science-tweets) of 295811 tweets about data science from the years 2010 until 2021 and had to build a classifier that would detect whether a tweet would go viral or not. The measure for it being viral was when the sum of likes and retweets were bigger than 50, which resulted in 91% false (or non-viral) labels, and 9% true (or viral) labels.
 
 Our work consisted of a number of steps in a pipeline, in summary: We loaded and labeled the data using the framework given to us by Bechberger. We then preprocessed the data, mainly the raw tweet, to better fit our feature extraction later. This was done by removing punctuation, stopwords, etc. and also tokenizing into single words. After this, we extracted a handful of features which we found to be of importance, some were already included in the raw dataset columns, some we had to extract ourselves. Since the feature space was not exactly very large and mostly overseeable, we did not apply any dimensionality reduction other than what was already implemented. So after the features, we headed straight into classification using a variety of classifiers and benchmarks for evaluation. 
 
@@ -433,7 +433,7 @@ Below are listed all classifiers we used, including their hyperparameter tuning.
 
 Most classifiers worked fine but some of them took way longer than expected, which was a little bit of a setback and the reason why we added a new argument: ```--small X``` which would just use X tweets for quick testing. This helped testing out classifiers little by little and also helped with the debugging. 
 
-What we learnt from trying each of the above listed classifiers is that each behaves very differently and not all of them were useful. Starting with the first two, the Majority and Frequency classifier from `sklearn`'s ```DummyClassifier``` were almost completely unusable to us. These are swiftly followed by the `MultinomialNB` classifier which does not take negative inputs, rendering it useless due to the negative values from the HashingVectorizer. The `KNN` classifier worked alright at first, but after tuning it, we did not see any major improvements in performance. It also takes a long time since it keeps the inputs in memory. The normal `SVC (SVM)` worked well with small samples (<10000), but was also almost unusable with the entire dataset, since the time increases quadratically per sample. Using the `LinearSVC` classifier for larger datasets (since it scales better on more samples) turned out to work alright. Another linear classifer was the `SGDClassifier`, which used previous models like the support vector machine (SVM) alongisde stochastic gradient descent (SGD) learning. This classifier was very quick (convergence after 371 epochs took 41.24 seconds) but gave average results. Our best classifer was `LinearRegression` which converged on the training after 3850 iterations and 7.5 min. This is also the classifier that made the most sense for our features by using... 
+What we learnt from trying each of the above listed classifiers is that each behaves very differently and not all of them were useful. Starting with the first two, the Majority and Frequency classifier from `sklearn`'s ```DummyClassifier``` were almost completely unusable to us. These are swiftly followed by the `MultinomialNB` classifier which does not take negative inputs, rendering it useless due to the negative values from the HashingVectorizer. The `KNN` classifier worked alright at first, but after tuning it, we did not see any major improvements in performance. It also takes a long time since it keeps the inputs in memory. The normal `SVC (SVM)` worked well with small samples (<10000), but was also almost unusable with the entire dataset, since the time increases quadratically per sample. Using the `LinearSVC` classifier for larger datasets (since it scales better on more samples) turned out to work alright. Another linear classifer was the `SGDClassifier`, which used previous models like the support vector machine (SVM) alongisde stochastic gradient descent (SGD) learning. This classifier was very quick (convergence after 371 epochs took 41.24 seconds) but gave average results. Our best classifer was `LinearRegression` which converged on the training after 3850 iterations and 7.5 min. This is also the classifier that made the most sense for our features since they are mostly linearly separable and 
 
 ## Evaluation
 
@@ -443,21 +443,19 @@ For our evaluation and to avoid a combinatorial feature evaluation problem, we o
 
 To evaluate our 3 classifiers, we mainly used the integrated ```classification report``` (including precision, recall, f1-score) from ```sklearn.metrics```, as well as single metric functions like the ```accuracy_score```, ```balanced_accuracy_score``` and the ```cohen_kappa_score```. 
 
-We first used all the described functions in our pipeline. We found that our pipeline has some drawbacks: for example, it can be very complicated, especially for beginners, which output files are used as input in the next file. Also, we had to create a new column in our feature extraction dataset for each dimension to deal with the HashVectorizer. As a result, the pipeline was very slow and the result of the classifier was unsatisfactory. To overcome these challenges, we created a new pipeline by using all the power of a Sklearn pipeline in `all_in_one_multiple_input_features.py`. 
+We first used all the described functions in our given pipeline. We found that our pipeline had some drawbacks: for example, it could be very complicated, especially for beginners, telling which output files are used as input in the next files since there are so many steps. Also, we had to create a new column in our feature extraction dataset for each dimension to deal with the HashVectorizer. As a result, the pipeline was very slow and our classifier results were unsatisfactory. To overcome these challenges, we created a new pipeline by using the power of the `sklearn` integrated pipeline function in `all_in_one_multiple_input_features.py`. 
 
 ### Results
 
-The first part of the results is about the results of our old pipeline. In the seccond part we use the new pipeline, which gave us the oppertunity to do many experiences to compare different classiferes and features. 
+The first part of this section is about the results of our old pipeline. In the second part we use the new pipeline, which gave us the opportunity to work faster and giving us better results overall. In the final section, we show some experimental tests using the classifiers and features. 
 
 <br />
 <br />
 
-### A) *All Features with old Pipeline*
+#### A) *Old Pipeline*
 
+For our 3 classifiers mentioned above, we ran each classifier using _all_ features from the feature extraction. 
 
-#### A) *New sklearn Pipeline*
-
-For our first 3 tests we combined in our new sklearn pipeline `all_in_one_multiple_input_features.py` the following features: time, videos, photos, tweet length and HashingVectorizer with 2^17 features. We didn't use all of our previous features due to lack of time, as we had to re-implement them to integrate them into the new pipeline, and the new experiments show that one feature in particular was critical to the result.
 
 <br />
 
@@ -509,7 +507,6 @@ Detail:
 weighted avg       0.90      0.91      0.88      8498
 
 ```
-To have at least some comparable result we set max_iter to 5000. This lead to training time over 20 min, and didn't even converged then.
 
 <br />
 
@@ -542,7 +539,93 @@ weighted avg       0.90      0.83      0.85      8498
 <br />
 <br />
 
-#### B) *Specific Features*
+#### B) *New sklearn Pipeline*
+
+For our 3 classifiers we added the following features into our new pipeline: time, video_bool, photo_bool, tweet_length and HashingVectorizer with 2^17 features (see: `all_in_one_multiple_input_features.py`). We didn't use all of our previous features due to lack of time, as we had to re-implement them to fit them into the new pipeline, and the new experiments show that only one feature in particular was critical to the result.
+
+<br />
+
+1. *SGDC classifier*
+
+Summary: 
+```
+accuracy: 0.5681336785125912
+Cohen's kappa: 0.12634914111071838
+balanced accuracy: 0.6766037922018122
+```
+
+Detail:
+```
+
+     Test set      precision    recall  f1-score   support
+
+        Flop       0.96      0.54      0.69      7665
+       Viral       0.16      0.81      0.27       833
+    accuracy                           0.57      8498
+
+   macro avg       0.56      0.68      0.48      8498
+weighted avg       0.88      0.57      0.65      8498
+
+```
+<br />
+
+2. *Linear SVC*
+
+Sumary: 
+```
+
+accuracy: 0.9113909155095317
+Cohen's kappa: 0.204992981717679
+balanced accuracy: 0.5646044719257566
+
+```
+
+Detail:
+```
+
+              precision    recall  f1-score   support
+
+        Flop       0.91      1.00      0.95      7665
+       Viral       0.78      0.13      0.23       833
+    accuracy                           0.91      8498
+
+   macro avg       0.85      0.56      0.59      8498
+weighted avg       0.90      0.91      0.88      8498
+
+```
+
+<br />
+
+3. *Logistic Regression*
+
+Summary:
+```
+
+accuracy: 0.8272534714050365
+Cohen's kappa: 0.3513706313151349
+balanced accuracy: 0.7646028274323429
+
+```
+
+Detail: 
+```
+
+               precision    recall  f1-score   support
+
+        Flop       0.96      0.84      0.90      7665
+       Viral       0.32      0.69      0.44       833
+
+    accuracy                           0.83      8498
+
+   macro avg       0.64      0.76      0.67      8498
+weighted avg       0.90      0.83      0.85      8498
+
+```
+
+<br />
+<br />
+
+#### B) **
 <br />
 1. *Logistic Regression without HashingVectorizer*
 
@@ -601,7 +684,7 @@ weighted avg       0.89      0.83      0.85      8498
 
 ```
 
-3. *What's about overfitting?*
+3. *What about overfitting?*
 
 To see to what extent the classifier overfits, we created a table for the training set for all features with the LogisticRegression classifier. Thus, this is the output for the predicted data previously given to the classifier for training. With regard to the parameters it is comparable to the output of the test set above (A 3)
 
@@ -689,11 +772,8 @@ Example inputs and their corresponding outputs:
 
 Input: | Output: 
 -------|--------
-`data algorithm free coding https://pbs.twimg.com/media/xyz.png 😀 😃 😄 😁 😆 😅 😂 🤣 🥲 ☺️ 😊 😇 🙂 🙃 😉` | `[True] Your tweet will most likely go viral.`
-
-Input: | Output: 
--------|--------
-`hello there #123` | `[False] Your tweet will most likely not go viral.`
+`data algorithm free coding https://pbs.twimg.com/media/xyz.png 😀 😃 😄 😁 😆 😅 😂 🤣 🥲 ☺️ 😊 😇 🙂 🙃 😉` | [True] Your tweet will most likely go viral.
+`hello there #123` | [False] Your tweet will most likely not go viral.
 
 
 ## Project Organization
