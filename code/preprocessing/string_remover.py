@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Preprocessor that removes punctuation from the original tweet text.
-Created on Wed Sep 29 09:45:56 2021
-@author: lbechberger
+Remove special types of strings including emojis, links, stopwords.
+
+Created on Mon Sep 27 12:11:11 2021
+
+@author: mkalcher, magmueller, shagemann
 """
-import string
 from code.preprocessing.preprocessor import Preprocessor
 from code.util import COLUMN_TWEET, COLUMN_PUNCTUATION
 from nltk.corpus import stopwords

@@ -1,3 +1,13 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Oct  20 14:53:52 2021
+
+All in one file, use sklearn to produce a single-file pipeline.
+
+@author: magnus 
+"""
+
 import argparse
 
 # import pdb
@@ -27,13 +37,11 @@ from sklearn.decomposition import PCA, TruncatedSVD, NMF
 # classifier
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.linear_model import LogisticRegression
-from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import SGDClassifier
-from sklearn.svm import LinearSVC, l1_min_c, SVC, LinearSVR, SVR
+from sklearn.svm import LinearSVC
 
 from sklearn.pipeline import Pipeline
 from sklearn.pipeline import FeatureUnion
-from sklearn.model_selection import cross_val_score
 from sklearn.preprocessing import FunctionTransformer
 from sklearn.preprocessing import StandardScaler
 
@@ -57,7 +65,6 @@ from code.util import (
     MAX_ITER_SGD,
 )
 import pandas as pd
-import numpy as np
 
 """
 # balancing
@@ -67,6 +74,7 @@ from collections import Counter
 """
 from sklearn.model_selection import train_test_split
 
+# ---------------------------------------------------
 
 parser = argparse.ArgumentParser(description="all in one")
 parser.add_argument("input_file", help="path to the input file")

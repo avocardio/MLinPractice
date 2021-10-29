@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Thu Oct  7 14:51:00 2021
+A class to test the bigrams
+
+Created on Thu Oct  7 14:51:00 2021.
 
 @author: ml
 """

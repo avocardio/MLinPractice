@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
+Extract the hour of the 'time' column.
+
 Created on Tue Oct 19 22:05:32 2021
 
 @author: maximilian

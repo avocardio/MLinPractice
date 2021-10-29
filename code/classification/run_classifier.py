@@ -5,19 +5,15 @@ Train or evaluate a single classifier with its given set of hyperparameters.
 
 Created on Wed Sep 29 14:23:48 2021
 
-@author: lbechberger
+@author: mkalcher, magmueller, shagemann
 """
 
-import pdb
 import argparse
-import pandas as pd
-import numpy as np
 import pickle
 
 from sklearn.dummy import DummyClassifier
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.linear_model import LogisticRegression
-from sklearn.ensemble import RandomForestClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.linear_model import SGDClassifier
 from sklearn.svm import LinearSVC, SVC
@@ -188,7 +184,7 @@ def create_classifier(args, data):
                 class_weight=balanced,
                 random_state=args.seed,
                 verbose=verbose,
-                max_iter=30000,
+                max_iter=MAX_ITER_LINEAR_SVC,
             )
 
         try:

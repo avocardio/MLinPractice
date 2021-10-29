@@ -4,8 +4,8 @@
 mkdir -p data/all_in_one_multiple_input_features/
 
 # iterate through multiple classifiers if needed
-classifieres=("LogisticRegression") #SGDClassifier LinearSVC LogisticRegression
-for k in $classifieres; do
+classifiers=("LogisticRegression") #SGDClassifier LinearSVC LogisticRegression
+for k in $classifiers; do
     echo $k
     # all_in_one_multiple_input_features.py gets as an input a csv file with your dataframe
     # we use here data/preprocessing/preprocessed.csv so you have to first run code/preprocessing.sh to download, preprocess and label the data correctly

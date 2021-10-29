@@ -1,5 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+"""
+Compute the photo in the 'photo' column as an integer [0,1].
+
+Created on Wed Sep 29 12:22:13 2021
+
+@author: mkalcher, magmueller, shagemann
+"""
 
 import numpy as np
 from code.feature_extraction.feature_extractor import FeatureExtractor

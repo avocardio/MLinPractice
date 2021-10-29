@@ -14,7 +14,6 @@ from tqdm import tqdm
 from sklearn.pipeline import make_pipeline
 from code.preprocessing.punctuation_remover import PunctuationRemover
 from code.preprocessing.string_remover import StringRemover
-from code.preprocessing.language_remover import LanguageRemover
 from code.preprocessing.tokenizer import Tokenizer
 from code.util import COLUMN_TWEET, SUFFIX_TOKENIZED, COLUMN_LANGUAGE, COLUMN_PREPROCESS
 
@@ -67,12 +66,11 @@ if args.tokenize:
         Tokenizer(COLUMN_PREPROCESS, COLUMN_PREPROCESS + SUFFIX_TOKENIZED)
     )
 
-# no need to detect languages, because it is already given
-# if args.language is not None:
-#   preprocessors.append(LanguageRemover())
 
 len_before = df[COLUMN_TWEET].str.len().sum()
 
+
+# This is the part we used instead if the language_remover.py file
 if args.language is not None:
     # filter out one language
     before = len(df)
@@ -86,7 +84,7 @@ for preprocessor in tqdm(preprocessors):
     df = preprocessor.fit_transform(df)
 
 len_after = df[COLUMN_PREPROCESS].str.len().sum()
-print("Number of chars before preprocessing: {}".format(len_before))
+print("/nNumber of chars before preprocessing: {}".format(len_before))
 print("Number of chars after preprocessing: {}".format(len_after))
 print(
     "Removed: {0} ({1}%)".format(

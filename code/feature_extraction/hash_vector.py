@@ -1,14 +1,17 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+"""
+Compute the HashingVectorizer for input words.
 
+Created on Wed Sep 29 12:22:13 2021
 
-import numpy as np
+@author: mkalcher, magmueller, shagemann
+"""
+
 from code.feature_extraction.feature_extractor import FeatureExtractor
 from sklearn.feature_extraction.text import HashingVectorizer
 
 from code.util import HASH_VECTOR_N_FEATURES
-
-# class for extracting the character-based length as a feature
 
 
 class HashVector(FeatureExtractor):

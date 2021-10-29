@@ -25,7 +25,6 @@ class Tokenizer(Preprocessor):
         """Tokenize the tweet."""
 
         tokenized = []
-        import pdb
 
         for tweet in inputs[0]:
             # pdb.set_trace()

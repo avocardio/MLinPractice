@@ -1,8 +1,19 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+"""
+Remove all languages that are not equal to input.
+
+* This file was not directly used in the preprocessing, because
+we have to remove the entire data rows and not just single 
+instances which are not equal to the language input. The language
+was thus removed directly in the run_preprocessing.py file.
+
+Created on Wed Sep 22 12:10:13 2021
+
+@author: mkalcher, magmueller, shagemann
+"""
 
 
-import string
 from code.preprocessing.preprocessor import Preprocessor
 from langdetect import detect
 from code.util import COLUMN_TWEET, COLUMN_LANGUAGE

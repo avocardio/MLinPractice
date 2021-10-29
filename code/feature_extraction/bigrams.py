@@ -3,7 +3,9 @@
 """
 Created on Thu Oct  7 14:53:52 2021
 
-@author: ml
+Compute the bigrams of input words.
+
+@author: lbechberger
 """
 
 import ast

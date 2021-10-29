@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
+This class was to test the tokenizer. 
+
 Created on Thu Oct  7 14:30:41 2021
 
 @author: ml

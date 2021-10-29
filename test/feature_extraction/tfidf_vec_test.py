@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
+Class for testing the If Idf feature (not used). 
+It was nonetheless good for TDD. 
+
 Created on Thu Oct  7 14:51:00 2021
 
 @author: ml

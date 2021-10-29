@@ -1,13 +1,18 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+"""
+Compute the word2vec for each tokenized word.
+
+Created on Wed Sep 29 12:22:13 2021
+
+@author: mkalcher, magmueller, shagemann
+"""
 
 import numpy as np
 import gensim.downloader as api
-import pandas as pd
 import ast
 from code.feature_extraction.feature_extractor import FeatureExtractor
 
-# class for extracting the character-based length as a feature
 class Word2Vec(FeatureExtractor):
     """
         Create Word2Vec feature.
@@ -24,7 +29,7 @@ class Word2Vec(FeatureExtractor):
 
         embeddings = api.load(
             "word2vec-google-news-300"
-        )  # Try glove-twitter-200 for classifier
+        )  # Alternative: glove-twitter-200 for classifier
         keywords = [
             "coding",
             "free",

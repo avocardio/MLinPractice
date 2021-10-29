@@ -1,10 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+"""
+Remove all punctuation from the raw tweet column.
+
+Created on Wed Sep 10 12:22:13 2021
+
+@author: mkalcher, magmueller, shagemann
+"""
 
 import string
 from code.preprocessing.preprocessor import Preprocessor
-from code.util import COLUMN_TWEET, COLUMN_PUNCTUATION
-import pdb
 
 punct = set(string.punctuation).union(string.digits).union("—")
 

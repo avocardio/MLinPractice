@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
+A class to test the HashingVectorizer
+
 Created on Thu Oct  14 14:51:00 2021
 """
 

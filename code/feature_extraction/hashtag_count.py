@@ -1,5 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+"""
+Count number of hashtags from column 'hashtags'.
+
+Created on Wed Sep 29 12:22:13 2021
+
+@author: mkalcher, magmueller, shagemann
+"""
 
 import numpy as np
 import ast

@@ -2,7 +2,9 @@
 # -*- coding: utf-8 -*-
 """
 Simple feature that tells how many emojis the tweet contains.
+
 Created on Wed Sep 29 12:29:25 2021
+
 @author: maximilian
 """
 
@@ -19,7 +21,6 @@ class EmojiCount(FeatureExtractor):
 
     # don't need to fit, so don't overwrite _set_variables()
 
-    # returns column including the amount of emojis per tweet
     def _get_values(self, inputs):
         """Returns the column with the number of emojis for each tweet."""
 
