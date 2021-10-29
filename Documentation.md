@@ -777,7 +777,7 @@ Since we also included the posting time of the tweet as a feature, we get the cu
 Working example of inputs and their corresponding outputs:
 
 Input: | Output: 
--------|--------
+-------:|:--------
 `data algorithm free coding https://pbs.twimg.com/media/xyz.png 😀 😃 😄 😁 😆 😅 😂 🤣 🥲 ☺️ 😊 😇 🙂 🙃 😉` | [True] Your tweet will most likely go viral.
 `hello there #123` | [False] Your tweet will most likely not go viral.
 
