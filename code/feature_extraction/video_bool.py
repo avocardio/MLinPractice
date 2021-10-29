@@ -11,7 +11,7 @@ Created on Wed Sep 29 12:29:25 2021
 import numpy as np
 from code.feature_extraction.feature_extractor import FeatureExtractor
 
-# class for extracting the photo-bool as a feature
+# class for extracting the video as a feature
 class VideoBool(FeatureExtractor):
     """Create a feature based on if a video exists or not."""
     # constructor
