@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Simple feature that tells whether photos are present or not.
+Simple feature that tells how many emojis the tweet contains.
 Created on Wed Sep 29 12:29:25 2021
 @author: maximilian
 """
@@ -9,7 +9,7 @@ Created on Wed Sep 29 12:29:25 2021
 import numpy as np
 from code.feature_extraction.feature_extractor import FeatureExtractor
 
-# class for extracting the photo-bool as a feature
+# class for extracting the emojis as a feature
 class EmojiCount(FeatureExtractor):
     """Counts the emojis linewise in a tweet column."""
 
@@ -19,9 +19,9 @@ class EmojiCount(FeatureExtractor):
 
     # don't need to fit, so don't overwrite _set_variables()
 
-    # 0 if no photos, return 1 else
+    # returns column including the amount of emojis per tweet
     def _get_values(self, inputs):
-        """Retruns the column with the number of emojis for each tweet."""
+        """Returns the column with the number of emojis for each tweet."""
 
         column = inputs[0].str
         column = [
