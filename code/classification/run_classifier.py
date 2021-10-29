@@ -196,6 +196,7 @@ def create_classifier(args, data):
 
 
 def evaluate_classifier(args, data, prediction):
+    print('\n')
     # collect all evaluation metrics
     evaluation_metrics = []
     if args.accuracy:
