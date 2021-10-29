@@ -5,7 +5,7 @@ Simple feature that counts the number of characters in the given column.
 
 Created on Wed Sep 29 12:29:25 2021
 
-@author: lbechberger
+@author: mkalcher, magmueller, shagemann
 """
 
 import numpy as np

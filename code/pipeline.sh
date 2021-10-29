@@ -1,13 +1,13 @@
 #!/bin/bash
 # overall pipeline for the ML experiments
 
-echo "loading data"
+echo -e "/nloading data"
 code/load_data.sh
-echo "preprocessing"
+echo -e "/npreprocessing"
 code/preprocessing.sh
-echo "feature extraction"
+echo -e "/nfeature extraction"
 code/feature_extraction.sh
 #echo "dimensionality reduction"
 #code/dimensionality_reduction.sh
-echo "classification"
+echo -e "/nclassification"
 code/classification.sh
