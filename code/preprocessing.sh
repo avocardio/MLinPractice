@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # create directory if not yet existing
-#mkdir -p data/preprocessing/split/
+mkdir -p data/preprocessing/split/
 
 # install all NLTK models
 #python -m nltk.downloader all
